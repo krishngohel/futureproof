@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --foreground: #cacaca;
+  --background: #111111;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: -apple-system, 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 700;
+}
+
+.prose {
+  color: #999999;
+  line-height: 1.7;
+}
+
+.prose h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #cacaca;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.025em;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: -0.016em;
+}
+
+.prose strong {
+  font-weight: 700;
+  color: #cacaca;
+}
+
+.prose ul {
+  list-style: disc;
+  list-style-position: inside;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.prose li {
+  font-size: 0.875rem;
+  letter-spacing: -0.016em;
+}
+
+.prose code {
+  background: #343434;
+  color: #ff4300;
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-family: ui-monospace, 'Fira Code', monospace;
+  font-weight: 600;
+}
+
+.prose pre {
+  background: #181818;
+  border: 1px solid #343434;
+  border-radius: 12px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.prose pre code {
+  background: transparent;
+  color: #cacaca;
+  padding: 0;
+  font-size: 0.8rem;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.prose th {
+  text-align: left;
+  color: #666666;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  padding: 6px 12px;
+  border-bottom: 1px solid #343434;
+}
+
+.prose td {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(52,52,52,0.5);
+  color: #999999;
+  letter-spacing: -0.011em;
+}
+
+.prose tr:last-child td {
+  border-bottom: none;
+}
