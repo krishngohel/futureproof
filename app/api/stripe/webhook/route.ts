@@ -34,9 +34,13 @@ export async function POST(req: NextRequest) {
       const session = event.data.object as Stripe.Checkout.Session;
       const userId = session.metadata?.supabase_user_id;
       if (userId) {
+        // Revision Inbox checkouts carry plan metadata; default keeps
+        // legacy Futureproof checkouts working unchanged.
+        const tier = session.metadata?.plan === "solo" ? "solo" : undefined;
         await supabase.from("profiles").update({
           is_subscribed: true,
           stripe_subscription_id: session.subscription as string,
+          ...(tier ? { subscription_tier: tier } : {}),
         }).eq("id", userId);
       }
       break;
@@ -47,6 +51,7 @@ export async function POST(req: NextRequest) {
       await supabase.from("profiles").update({
         is_subscribed: false,
         stripe_subscription_id: null,
+        subscription_tier: "free",
       }).eq("stripe_subscription_id", sub.id);
       break;
     }
@@ -54,8 +59,10 @@ export async function POST(req: NextRequest) {
     case "invoice.payment_failed": {
       const invoice = event.data.object as Stripe.Invoice;
       if (invoice.subscription) {
-        await supabase.from("profiles").update({ is_subscribed: false })
-          .eq("stripe_subscription_id", invoice.subscription as string);
+        await supabase.from("profiles").update({
+          is_subscribed: false,
+          subscription_tier: "free",
+        }).eq("stripe_subscription_id", invoice.subscription as string);
       }
       break;
     }
